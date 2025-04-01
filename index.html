@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <title>Waschmaschinenstatus</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      background-color: #f4f4f4;
+    }
+    .ampel {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto;
+      border-radius: 50%;
+      background-color: grey;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    }
+    .gruen { background-color: #4CAF50; }
+    .rot { background-color: #f44336; }
+    .text {
+      margin-top: 20px;
+      font-size: 1.4em;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>Status der Waschmaschinen</h1>
+  <div id="ampel" class="ampel"></div>
+  <div id="statusText" class="text">Lade Status...</div>
+
+  <script>
+    async function ladeStatus() {
+      try {
+        const response = await fetch("https://asblvberlin-my.sharepoint.com/:u:/g/personal/j_krienitz_asb-berlin_de/EYP7aWWFHERPg1-o_8tOAWEBKDHmtoa4-q0H3IHCn867zA?e=HVmHYP");
+        const data = await response.json();
+        const ampel = document.getElementById("ampel");
+        const text = document.getElementById("statusText");
+
+        if (data.freieMaschinen > 0) {
+          ampel.classList.add("gruen");
+          text.innerText = `${data.freieMaschinen} Maschinen frei`;
+        } else {
+          ampel.classList.add("rot");
+          text.innerText = "Keine Maschinen frei!";
+        }
+      } catch (error) {
+        document.getElementById("statusText").innerText = "Fehler beim Laden!";
+        console.error("Fehler beim Abrufen der JSON-Datei:", error);
+      }
+    }
+
+    ladeStatus();
+  </script>
+</body>
+</html>
