@@ -35,7 +35,7 @@
   <script>
     async function ladeStatus() {
       try {
-        const response = await fetch("https://asblvberlin-my.sharepoint.com/:u:/g/personal/j_krienitz_asb-berlin_de/EYP7aWWFHERPg1-o_8tOAWEBKDHmtoa4-q0H3IHCn867zA?e=HVmHYP");
+        const response = await fetch("https://asblvberlin-my.sharepoint.com/my?id=%2Fpersonal%2Fj%5Fkrienitz%5Fasb%2Dberlin%5Fde%2FDocuments%2FPublicWebData%2Fmaschinen%5Fstatus%2Ejson&parent=%2Fpersonal%2Fj%5Fkrienitz%5Fasb%2Dberlin%5Fde%2FDocuments%2FPublicWebData");
         const data = await response.json();
         const ampel = document.getElementById("ampel");
         const text = document.getElementById("statusText");
