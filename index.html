@@ -35,18 +35,14 @@
   <script>
     async function ladeStatus() {
       try {
-        // Ursprüngliche Google Drive URL
+        // Ursprüngliche Google Drive URL als direkter Download-Link
         const driveUrl = "https://drive.google.com/uc?export=download&id=1R6MCkx1ZS61WYq2vKckpDVhvay7L18Lv";
-        // Verwende AllOrigins als CORS-Proxy
-        const proxyUrl = "https://api.allorigins.hexocode.repl.co/get?disableCache=true&url=" + encodeURIComponent(driveUrl);
-
-        const response = await fetch(proxyUrl);
+        // Alternativer CORS-Proxy: Thingproxy
+        const proxyUrl = "https://thingproxy.freeboard.io/fetch/";
+        const response = await fetch(proxyUrl + driveUrl);
         if (!response.ok) throw new Error("HTTP " + response.status);
         
-        const dataResponse = await response.json();
-        // AllOrigins liefert den Inhalt in dataResponse.contents als String
-        const data = JSON.parse(dataResponse.contents);
-
+        const data = await response.json();
         const ampel = document.getElementById("ampel");
         const text = document.getElementById("statusText");
 
