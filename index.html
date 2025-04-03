@@ -35,7 +35,7 @@
   <script>
     async function ladeStatus() {
       try {
-        const response = await fetch("https://drive.google.com/file/d/1R6MCkx1ZS61WYq2vKckpDVhvay7L18Lv/view?usp=sharing");
+        const response = await fetch("https://drive.google.com/uc?export=download&id=1R6MCkx1ZS61WYq2vKckpDVhvay7L18Lv");
         const data = await response.json();
         const ampel = document.getElementById("ampel");
         const text = document.getElementById("statusText");
